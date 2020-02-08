@@ -29,6 +29,8 @@ func readAttributeInfo(reader *ClassReader, cp ConstantPool) AttributeInfo {
 			attrInfo = &CodeAttribute{cp: cp}
 		case "LineNumberTable":
 			attrInfo = &LineNumberTableAttribute{}
+		case "BootstrapMethods":
+			attrInfo = &BootstrapMethodsAttribute{cp: cp}
 		default:
 			//TODO not implemented yet, just discard the bytes read
 			reader.ReadBytes(int(attrLength))
