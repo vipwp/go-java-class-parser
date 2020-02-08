@@ -1,7 +1,5 @@
 package classfile
 
-import "fmt"
-
 /*
 BootstrapMethods_attribute {
     u2 attribute_name_index;
@@ -21,7 +19,6 @@ type BootstrapMethodsAttribute struct {
 
 func (b *BootstrapMethodsAttribute) ReadInfo(reader *ClassReader) {
 	num := reader.ReadUint16()
-	fmt.Println(num)
 	for i := uint16(0); i < num; i++ {
 		m := BootstrapMethod{BootstrapMethodArguments: []uint16{}}
 		m.BootstrapMethodRef = reader.ReadUint16()
@@ -37,4 +34,16 @@ type BootstrapMethod struct {
 	cp                       ConstantPool
 	BootstrapMethodRef       uint16
 	BootstrapMethodArguments []uint16
+}
+
+func (b *BootstrapMethod) ClassName() string {
+	h := b.cp.GetConstantInfo(b.BootstrapMethodRef).(*ConstantMethodHandleInfo)
+	ref := b.cp.GetConstantInfo(h.referenceIndex).(*ConstantMethodrefInfo)
+	return ref.ClassName()
+}
+
+func (b *BootstrapMethod) NameAndDescriptor() (string, string) {
+	h := b.cp.GetConstantInfo(b.BootstrapMethodRef).(*ConstantMethodHandleInfo)
+	ref := b.cp.GetConstantInfo(h.referenceIndex).(*ConstantMethodrefInfo)
+	return ref.NameAndDescriptor()
 }

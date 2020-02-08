@@ -65,6 +65,10 @@ func (cf *ClassFile) readInterfaces(reader *ClassReader) {
 	}
 }
 
+func (cf *ClassFile) ConstantPool() ConstantPool {
+	return cf.constantPool
+}
+
 func (cf *ClassFile) Methods() []MemberInfo {
 	return cf.methods
 }
