@@ -20,7 +20,7 @@ type BootstrapMethodsAttribute struct {
 func (b *BootstrapMethodsAttribute) ReadInfo(reader *ClassReader) {
 	num := reader.ReadUint16()
 	for i := uint16(0); i < num; i++ {
-		m := BootstrapMethod{BootstrapMethodArguments: []uint16{}}
+		m := BootstrapMethod{cp: b.cp, BootstrapMethodArguments: []uint16{}}
 		m.BootstrapMethodRef = reader.ReadUint16()
 		numArguments := reader.ReadUint16()
 		for j := uint16(0); j < numArguments; j++ {

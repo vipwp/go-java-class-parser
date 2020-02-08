@@ -28,15 +28,13 @@ func TestParseBootstrapMethods(t *testing.T) {
 	cf := Parse(bs)
 	for _, a := range cf.attributes {
 		if v, ok := a.(*BootstrapMethodsAttribute); ok {
-			for _, x := range v.BootstrapMethods {
-				h := v.cp.GetConstantInfo(x.BootstrapMethodRef).(*ConstantMethodHandleInfo)
-				ref := v.cp.GetConstantInfo(h.referenceIndex).(*ConstantMethodrefInfo)
-				method, _ := ref.NameAndDescriptor()
-				if ref.ClassName() != "java/lang/invoke/LambdaMetafactory" {
-					t.Errorf("MethodHandle.MethodRef.className is unexpected. got=%s, want=%s", ref.ClassName(), "java/lang/invoke/LambdaMetafactory")
+			for _, method := range v.BootstrapMethods {
+				if method.ClassName() != "java/lang/invoke/LambdaMetafactory" {
+					t.Errorf("MethodHandle.MethodRef.className is unexpected. got=%s, want=%s", method.ClassName(), "java/lang/invoke/LambdaMetafactory")
 				}
-				if method != "metafactory" {
-					t.Errorf("MethodHandle.MethodRef.methodName is unexpected. got=%s, want=%s", ref.ClassName(), "metafactory")
+				methodName, _ := method.NameAndDescriptor()
+				if methodName != "metafactory" {
+					t.Errorf("MethodHandle.MethodRef.methodName is unexpected. got=%s, want=%s", methodName, "metafactory")
 				}
 			}
 		}
