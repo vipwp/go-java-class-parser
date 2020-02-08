@@ -69,6 +69,10 @@ func (cf *ClassFile) Methods() []MemberInfo {
 	return cf.methods
 }
 
+func (cf *ClassFile) Attributes() []AttributeInfo {
+	return cf.attributes
+}
+
 func (cf *ClassFile) Print() {
 	fmt.Printf("Size: %d bytes\n", cf.size)
 	fmt.Printf("magic: %x\n", cf.magic)
