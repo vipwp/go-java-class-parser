@@ -41,6 +41,10 @@ type ClassFile struct {
 
 func Parse(bytes []byte) *ClassFile {
 	reader := NewClassReader(bytes)
+	return ParseFromClassReader(reader)
+}
+
+func ParseFromClassReader(reader IClassReader) *ClassFile {
 	cf := &ClassFile{}
 	cf.size = reader.Length()
 	cf.magic = reader.ReadUint32()
@@ -58,7 +62,7 @@ func Parse(bytes []byte) *ClassFile {
 	return cf
 }
 
-func (cf *ClassFile) readInterfaces(reader *ClassReader) {
+func (cf *ClassFile) readInterfaces(reader IClassReader) {
 	cf.interfaces = make([]uint16, reader.ReadUint16())
 	for i := 0; i < len(cf.interfaces); i++ {
 		cf.interfaces[i] = reader.ReadUint16()
@@ -90,7 +94,6 @@ func (cf *ClassFile) Print() {
 	fmt.Println("**********************************************************")
 	for i, length := 1, len(cf.constantPool); i < length; i++ {
 		fmt.Printf(" #%2d = ", i)
-		//fmt.Println(cf.constantPool[i])
 		if cp, ok := cf.constantPool[i].(*ConstantClassInfo); ok {
 			fmt.Printf("Class\t\t#%d\t\t\t// %s", cp.nameIndex, cp.String(cf.constantPool))
 		} else if cp, ok := cf.constantPool[i].(*ConstantFieldrefInfo); ok {

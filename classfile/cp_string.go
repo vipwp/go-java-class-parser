@@ -4,9 +4,8 @@ type ConstantStringInfo struct {
 	stringIndex uint16
 }
 
-func (this *ConstantStringInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantStringInfo) ReadInfo(reader IClassReader) {
 	this.stringIndex = reader.ReadUint16()
-	//fmt.Printf("String\t\t#%d\n", this.stringIndex)
 }
 
 func (this *ConstantStringInfo) String(constantPool ConstantPool) string {

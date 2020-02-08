@@ -29,7 +29,7 @@ type CodeAttribute struct {
 	Attributes []AttributeInfo  //u2 attributes_count
 }
 
-func (this *CodeAttribute) ReadInfo(reader *ClassReader) {
+func (this *CodeAttribute) ReadInfo(reader IClassReader) {
 	this.MaxStack = reader.ReadUint16()
 	this.MaxLocals = reader.ReadUint16()
 	this.Code = reader.ReadBytes(int(reader.ReadUint32()))
@@ -82,7 +82,7 @@ type exceptionTable struct {
 	catchType uint16
 }
 
-func (this *exceptionTable) ReadInfo(reader *ClassReader) {
+func (this *exceptionTable) ReadInfo(reader IClassReader) {
 	this.startPc = reader.ReadUint16()
 	this.endPc = reader.ReadUint16()
 	this.handlerPc = reader.ReadUint16()

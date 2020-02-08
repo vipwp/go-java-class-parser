@@ -17,7 +17,7 @@ type MemberInfo struct {
 	attributes      []AttributeInfo
 }
 
-func readMembers(reader *ClassReader, cp ConstantPool) []MemberInfo {
+func readMembers(reader IClassReader, cp ConstantPool) []MemberInfo {
 	members := make([]MemberInfo, reader.ReadUint16())
 	for i := 0; i < len(members); i++ {
 		members[i] = MemberInfo{

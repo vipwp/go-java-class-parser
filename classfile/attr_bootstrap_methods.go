@@ -17,7 +17,7 @@ type BootstrapMethodsAttribute struct {
 	BootstrapMethods []BootstrapMethod
 }
 
-func (b *BootstrapMethodsAttribute) ReadInfo(reader *ClassReader) {
+func (b *BootstrapMethodsAttribute) ReadInfo(reader IClassReader) {
 	num := reader.ReadUint16()
 	for i := uint16(0); i < num; i++ {
 		m := BootstrapMethod{cp: b.cp, BootstrapMethodArguments: []uint16{}}

@@ -19,7 +19,7 @@ type lineNumberTable struct {
 	lineNumber uint16
 }
 
-func (this LineNumberTableAttribute) ReadInfo(reader *ClassReader) {
+func (this LineNumberTableAttribute) ReadInfo(reader IClassReader) {
 	lineNumberTableLength := reader.ReadUint16()
 	this.lineNumberTables = make([]lineNumberTable, lineNumberTableLength)
 	for i := uint16(0); i < lineNumberTableLength; i++ {

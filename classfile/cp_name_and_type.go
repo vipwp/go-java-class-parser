@@ -7,10 +7,9 @@ type ConstantNameAndTypeInfo struct {
 	descriptorIndex uint16
 }
 
-func (this *ConstantNameAndTypeInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantNameAndTypeInfo) ReadInfo(reader IClassReader) {
 	this.nameIndex = reader.ReadUint16()
 	this.descriptorIndex = reader.ReadUint16()
-	//fmt.Printf("NameAndType\t#%d:#%d\n", this.nameIndex, this.descriptorIndex)
 }
 
 func (this ConstantNameAndTypeInfo) String(constantPool ConstantPool) string {

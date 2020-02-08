@@ -1,5 +1,7 @@
 package classfile
 
+import "fmt"
+
 const (
 	CONSTANT_Class              = 7
 	CONSTANT_Fieldref           = 9
@@ -20,7 +22,7 @@ const (
 type ConstantPool []ConstantPoolInfo
 
 type ConstantPoolInfo interface {
-	ReadInfo(reader *ClassReader)
+	ReadInfo(reader IClassReader)
 }
 
 func (p ConstantPool) GetConstantInfo(index uint16) ConstantPoolInfo {
@@ -44,7 +46,7 @@ func (self ConstantPool) getUtf8(index uint16) string {
 	return utf8Info.String()
 }
 
-func readConstantPool(reader *ClassReader) ConstantPool {
+func readConstantPool(reader IClassReader) ConstantPool {
 	constantPool := make([]ConstantPoolInfo, reader.ReadUint16())
 	for i := 1; i < len(constantPool); i++ {
 		cpInfo := newConstantPoolInfo(reader.ReadUint8(), constantPool)
@@ -87,6 +89,6 @@ func newConstantPoolInfo(constType uint8, cp ConstantPool) ConstantPoolInfo {
 	case CONSTANT_InvokeDynamic:
 		return &ConstantInvokeDynamicInfo{}
 	default:
-		panic("Invalid const type: ")
+		panic(fmt.Sprintf("Invalid const type: %d", constType))
 	}
 }

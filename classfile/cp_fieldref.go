@@ -7,10 +7,9 @@ type ConstantFieldrefInfo struct {
 	nameAndTypeIndex uint16
 }
 
-func (this *ConstantFieldrefInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantFieldrefInfo) ReadInfo(reader IClassReader) {
 	this.classIndex = reader.ReadUint16()
 	this.nameAndTypeIndex = reader.ReadUint16()
-	//fmt.Printf("Fieldref\t\t#%d.#%d\n", this.classIndex, this.nameAndTypeIndex)
 }
 
 func (this ConstantFieldrefInfo) String(constantPool ConstantPool) string {

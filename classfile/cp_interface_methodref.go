@@ -5,8 +5,7 @@ type ConstantInterfaceMethodrefInfo struct {
 	nameAndTypeIndex uint16
 }
 
-func (this *ConstantInterfaceMethodrefInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantInterfaceMethodrefInfo) ReadInfo(reader IClassReader) {
 	this.classIndex = reader.ReadUint16()
 	this.nameAndTypeIndex = reader.ReadUint16()
-	//fmt.Printf("InterfaceMethodref\t\t#%d.#%d\n", this.classIndex, this.nameAndTypeIndex)
 }

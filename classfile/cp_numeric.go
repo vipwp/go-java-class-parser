@@ -1,7 +1,6 @@
 package classfile
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -9,18 +8,16 @@ type ConstantIntegerInfo struct {
 	bytes uint32
 }
 
-func (this *ConstantIntegerInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantIntegerInfo) ReadInfo(reader IClassReader) {
 	this.bytes = reader.ReadUint32()
-	//fmt.Printf("Integer\t\t%s\n", this.bytes)
 }
 
 type ConstantFloatInfo struct {
 	bytes uint32
 }
 
-func (this *ConstantFloatInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantFloatInfo) ReadInfo(reader IClassReader) {
 	this.bytes = reader.ReadUint32()
-	//fmt.Printf("Float\t\t%s\n", this.bytes)
 }
 
 func (this *ConstantFloatInfo) Value() float32 {
@@ -32,10 +29,9 @@ type ConstantLongInfo struct {
 	lowBytes  uint32
 }
 
-func (this *ConstantLongInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantLongInfo) ReadInfo(reader IClassReader) {
 	this.highBytes = reader.ReadUint32()
 	this.lowBytes = reader.ReadUint32()
-	fmt.Printf("Long\t\t%v%v\n", this.highBytes, this.lowBytes)
 }
 
 type ConstantDoubleInfo struct {
@@ -43,8 +39,7 @@ type ConstantDoubleInfo struct {
 	lowBytes  uint32
 }
 
-func (this *ConstantDoubleInfo) ReadInfo(reader *ClassReader) {
+func (this *ConstantDoubleInfo) ReadInfo(reader IClassReader) {
 	this.highBytes = reader.ReadUint32()
 	this.lowBytes = reader.ReadUint32()
-	//fmt.Printf("Double\t\t%s%s\n", this.highBytes, this.lowBytes)
 }
