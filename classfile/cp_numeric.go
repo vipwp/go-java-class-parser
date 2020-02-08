@@ -35,7 +35,7 @@ type ConstantLongInfo struct {
 func (this *ConstantLongInfo) ReadInfo(reader *ClassReader) {
 	this.highBytes = reader.ReadUint32()
 	this.lowBytes = reader.ReadUint32()
-	fmt.Printf("Long\t\t%s%s\n", this.highBytes, this.lowBytes)
+	fmt.Printf("Long\t\t%v%v\n", this.highBytes, this.lowBytes)
 }
 
 type ConstantDoubleInfo struct {
