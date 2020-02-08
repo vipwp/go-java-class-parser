@@ -9,6 +9,7 @@ func TestParse(t *testing.T) {
 	tests := []string{
 		"../testdata/Lambda.class",
 		"../testdata/Sample.class",
+		"../testdata/org.springframework.boot.loader.jar.JarFileEntries.class",
 	}
 	for _, tt := range tests {
 		bs, err := ioutil.ReadFile(tt)

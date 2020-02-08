@@ -49,10 +49,16 @@ func (self ConstantPool) getUtf8(index uint16) string {
 func readConstantPool(reader IClassReader) ConstantPool {
 	constantPool := make([]ConstantPoolInfo, reader.ReadUint16())
 	for i := 1; i < len(constantPool); i++ {
-		cpInfo := newConstantPoolInfo(reader.ReadUint8(), constantPool)
+		constType := reader.ReadUint8()
+		cpInfo := newConstantPoolInfo(constType, constantPool)
 		if cpInfo != nil {
 			cpInfo.ReadInfo(reader)
 			constantPool[i] = cpInfo
+		}
+		switch constType {
+		case CONSTANT_Double:
+		case CONSTANT_Long:
+			i++
 		}
 	}
 	return constantPool
