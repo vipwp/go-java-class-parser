@@ -57,6 +57,7 @@ func readConstantPool(reader IClassReader) ConstantPool {
 		}
 		switch constType {
 		case CONSTANT_Double:
+			i++
 		case CONSTANT_Long:
 			i++
 		}
