@@ -17,6 +17,8 @@ const (
 	CONSTANT_MethodHandle       = 15
 	CONSTANT_MethodType         = 16
 	CONSTANT_InvokeDynamic      = 18
+	CONSTANT_ModuleInfo         = 19
+	CONSTANT_PackageInfo        = 20
 )
 
 type ConstantPool []ConstantPoolInfo
@@ -95,6 +97,10 @@ func newConstantPoolInfo(constType uint8, cp ConstantPool) ConstantPoolInfo {
 		return &ConstantMethodTypeInfo{}
 	case CONSTANT_InvokeDynamic:
 		return &ConstantInvokeDynamicInfo{}
+	case CONSTANT_ModuleInfo:
+		return &ConstantModuleInfo{}
+	case CONSTANT_PackageInfo:
+		return &ConstantPackageInfo{}
 	default:
 		panic(fmt.Sprintf("Invalid const type: %d", constType))
 	}
